@@ -16,9 +16,12 @@
 
     </style>
     <link rel="icon" type="image/png" href="{{ asset('icons/MIDRAGON.png') }}">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/all.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/katex/katex.min.css') }}">
-    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />
+    <link rel="stylesheet" href="{{ asset('assets/flowbite/flowbite.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/lightbox/lightbox.min.css') }}">
+
+    @stack('links')
     @livewireStyles
     @vite('resources/css/app.css')
 </head>
@@ -31,7 +34,7 @@
         <!-- Logo -->
         <a href="{{ url('/') }}" class="tw-p-4 tw-text-white tw-font-bold tw-flex">
             <img src="{{ asset('icons/MIDRAGON.png') }}" class="tw-w-5 tw-h-5">
-            <span class="tw-font-extrabold tw-uppercase tw-tracking-widest tw-ml-2">MIDRAGON</span>
+            <span class="tw-font-bold tw-uppercase tw-tracking-widest tw-ml-2">MIDRAGON</span>
         </a>
         <!-- Mobile menu button -->
         <button class="mobile-menu-button tw-p-4 focus:tw-outline-none md:tw-hidden">
@@ -55,40 +58,46 @@
         <!-- nav -->
         <nav>
             <ul class="tw-list-none tw-p-0">
-                <li class="mid-menu-header">MAIN MENU</li>
+                <li class="mid-menu-header tw-text-yellow-300">MAIN MENU</li>
                 <li class="mid-nav-link">
-                    <a href="{{ url('/') }}" class="mid-nav-link-child">
+                    <a href="{{ url('/') }}"
+                        class="mid-nav-link-child {{ request()->is('/') ? 'tw-text-cyan-400' : 'tw-text-white' }}">
                         <i class="fas fa-home"></i>
                         <span class="tw-ml-3">Home</span>
                     </a>
 
                 </li>
                 <li class="mid-nav-link">
-                    <a href="{{ url('/articles') }}" class="mid-nav-link-child">
+                    <a href="{{ url('/articles') }}"
+                        class="mid-nav-link-child {{ request()->is('articles') || str_contains(request()->path(), 'article') ? 'tw-text-cyan-400' : 'tw-text-white' }}">
                         <i class="fas fa-blog"></i>
                         <span class="tw-ml-3.5">Articles</span>
                     </a>
                 </li>
                 <li class="mid-nav-link">
-                    <a href="{{ url('/project') }}" class="mid-nav-link-child">
+                    <a href="{{ url('/projects') }}"
+                        class="mid-nav-link-child {{ request()->is('projects') || str_contains(request()->path(), 'project') ? 'tw-text-cyan-400' : 'tw-text-white' }}">
                         <i class="fas fa-project-diagram"></i>
                         <span class="tw-ml-3">Projects</span>
                     </a>
                 </li>
                 <li class="mid-nav-link">
-                    <a href="{{ url('/course') }}" class="mid-nav-link-child">
+                    <a href="{{ url('/courses') }}"
+                        class="mid-nav-link-child {{ request()->is('courses') ? 'tw-text-cyan-400' : 'tw-text-white' }}">
                         <i class="fas fa-graduation-cap"></i>
                         <span class="tw-ml-3">Courses</span>
                     </a>
                 </li>
                 <li class="mid-nav-link">
-                    <a href="{{ url('/religions') }}" class="mid-nav-link-child">
+                    <a href="{{ url('/religions') }}"
+                        class="mid-nav-link-child {{ request()->is('religions') ? 'tw-text-cyan-400' : 'tw-text-white' }}">
                         <i class="fas fa-quran"></i>
                         <span class="tw-ml-4">Religions</span>
                     </a>
                 </li>
                 <li class="mid-nav-link">
-                    <a href="{{ url('/lectures') }}" class="mid-nav-link-child">
+                    <a href="{{ url('/lectures') }}"
+                        class="mid-nav-link-child {{ request()->is('lectures') ? 'tw-text-cyan-400' : 'tw-text-white' }}">
                         <i class="fas fa-user-graduate"></i>
                         <span class="tw-ml-4">Lectures</span>
                     </a>
@@ -112,12 +121,23 @@
                 </div>
             </a>
             <ul class="tw-flex tw-text-sm tw-space-x-4 tw-list-none">
-                <li><a href="{{ url('/') }}" class="tw-text-cyan-400">Home</a></li>
-                <li><a href="{{ url('/articles') }}" class="tw-text-gray-400">Articles</a></li>
-                <li><a href="{{ url('/project') }}" class="tw-text-gray-400">Projects</a></li>
-                <li><a href="{{ url('/course') }}" class="tw-text-gray-400">Courses</a></li>
-                <li><a href="{{ url('/religions') }}" class="tw-text-gray-400">Religions</a></li>
-                <li><a href="{{ url('/lectures') }}" class="tw-text-gray-400">Lectures</a></li>
+                <li><a href="{{ url('/') }}"
+                        class="{{ request()->is('/') ? 'tw-text-cyan-400' : 'tw-text-white' }}">Home</a></li>
+                <li><a href="{{ url('/articles') }}"
+                        class="{{ request()->is('articles') || str_contains(request()->path(), 'article') ? 'tw-text-cyan-400' : 'tw-text-white' }}">Articles</a>
+                </li>
+                <li><a href="{{ url('/projects') }}"
+                        class="{{ request()->is('projects') || str_contains(request()->path(), 'project') ? 'tw-text-cyan-400' : 'tw-text-white' }}">Projects</a>
+                </li>
+                <li><a href="{{ url('/course') }}"
+                        class="{{ request()->is('courses') ? 'tw-text-cyan-400' : 'tw-text-white' }}">Courses</a>
+                </li>
+                <li><a href="{{ url('/religions') }}"
+                        class="{{ request()->is('religions') ? 'tw-text-cyan-400' : 'tw-text-white' }}">Religions</a>
+                </li>
+                <li><a href="{{ url('/lectures') }}"
+                        class="{{ request()->is('lectures') ? 'tw-text-cyan-400' : 'tw-text-white' }}">Lectures</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -162,8 +182,10 @@
     @livewireScripts
 
     @stack('scripts')
-    <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
+    <script src="{{ asset('assets/midragon/select2/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/flowbite/flowbite.js') }}"></script>
     <script src="{{ asset('assets/katex/katex.min.js') }}"></script>
+    <script src="{{ asset('assets/lightbox/lightbox.min.js') }}"></script>
     <script>
         const btn = document.querySelector(".mobile-menu-button");
         const sidebar = document.querySelector(".sidebar");

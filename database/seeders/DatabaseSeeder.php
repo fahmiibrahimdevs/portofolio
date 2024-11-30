@@ -18,6 +18,10 @@ class DatabaseSeeder extends Seeder
             LaratrustSeeder::class,
             ArticleCategorySeeder::class,
             ArticleSubCategorySeeder::class,
+            ProjectCategorySeeder::class,
+            ProjectSubCategorySeeder::class,
+            ProjectTagSeeder::class,
+            AdminSeeder::class,
         ]);
         // User::factory()->create([
         //     'name' => 'Test User',

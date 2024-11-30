@@ -10,11 +10,14 @@ use Livewire\Attributes\Title;
 use App\Models\ArticleCategory;
 use App\Models\ArticleSubCategory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
 
 class Posts extends Component
 {
     use WithPagination;
-    #[Title('Postingan')]
+    use WithFileUploads;
+    #[Title('Article - Posts')]
 
     protected $listeners = [
         'delete'
@@ -23,6 +26,7 @@ class Posts extends Component
         'category_id' => 'required',
         'sub_category_id' => 'required',
         'title' => 'required',
+        'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:4096', // max 4MB
     ];
 
     public $lengthData = 25;
@@ -30,7 +34,7 @@ class Posts extends Component
     public $previousSearchTerm = '';
     public $isEditing = false;
     public $categories, $subcategories;
-    public $dataId, $category_id, $sub_category_id, $date, $title, $slug, $description, $fill_content, $status_publish;
+    public $dataId, $category_id, $sub_category_id, $thumbnail, $date, $title, $slug, $description, $fill_content, $status_publish;
 
     public function mount()
     {
@@ -66,7 +70,7 @@ class Posts extends Component
         $this->previousSearchTerm = $this->searchTerm;
     }
 
-    public function updatedIdCategory()
+    public function updatedCategoryId()
     {
         $this->subcategories    = ArticleSubCategory::select('id', 'sub_category_name')->where('category_id', $this->category_id)->get()->toArray();
         $this->dispatch('initSelect2SubCategory');
@@ -77,7 +81,7 @@ class Posts extends Component
         $this->searchResetPage();
         $search = '%' . $this->searchTerm . '%';
 
-        $data = ArticlePost::select('id', 'sub_category_id', 'date', 'title', 'slug', 'status_publish')
+        $data = ArticlePost::select('id', 'sub_category_id', 'thumbnail', 'date', 'title', 'slug', 'status_publish')
             ->where(function ($query) use ($search) {
                 $query->where('title', 'LIKE', $search);
                 $query->orWhere('date', 'LIKE', $search);
@@ -119,10 +123,18 @@ class Posts extends Component
     {
         $this->validate();
 
+        if ($this->thumbnail) {
+            $thumbnailPath = $this->thumbnail->storeAs('thumbnails', Str::slug(pathinfo($this->thumbnail->getClientOriginalName(), PATHINFO_FILENAME))
+            . rand(0,999) . '.' . $this->thumbnail->getClientOriginalExtension(), 'public'); 
+        } else {
+            $thumbnailPath = null;
+        }
+
         ArticlePost::create([
-            'id_user'         => Auth::user()->id,
+            'user_id'         => Auth::user()->id,
             'category_id'     => $this->category_id,
             'sub_category_id' => implode(',', $this->sub_category_id),
+            'thumbnail'     => $thumbnailPath,
             'date'         => $this->date,
             'title'           => $this->title,
             'slug'            => strtolower(Str::slug($this->slug) != "" ? Str::slug($this->slug) : Str::slug($this->title)),
@@ -148,6 +160,7 @@ class Posts extends Component
         $this->fill_content      = $data->fill_content;
         $this->status_publish  = $data->status_publish;
         $this->subcategories    = ArticleSubCategory::select('id', 'sub_category_name')->where('category_id', $this->category_id)->get()->toArray();
+        // dd($this->subcategories);
         $this->dispatch('initSelect2SubCategory');
 
         $this->initSelect2();
@@ -158,10 +171,24 @@ class Posts extends Component
         $this->validate();
 
         if ($this->dataId) {
+            $posts = ArticlePost::findOrFail($this->dataId);
+
+            if ($this->thumbnail) {
+                if ($posts->thumbnail && Storage::exists($posts->thumbnail)) {
+                    Storage::delete($posts->thumbnail);
+                }
+                $originalFileName = Str::slug(pathinfo($this->thumbnail->getClientOriginalName(), PATHINFO_FILENAME))
+                                    . rand(0,999) . '.' . $this->thumbnail->getClientOriginalExtension();
+                $thumbnailPath = $this->thumbnail->storeAs('thumbnails', $originalFileName, 'public');
+            } else {
+                $thumbnailPath = $posts->thumbnail;
+            }
+
             ArticlePost::findOrFail($this->dataId)->update([
-                'id_user'         => Auth::user()->id,
+                'user_id'         => Auth::user()->id,
                 'category_id'     => $this->category_id,
                 'sub_category_id' => implode(',', $this->sub_category_id),
+                'thumbnail'     => $thumbnailPath,
                 'date'         => $this->date,
                 'title'           => $this->title,
                 'slug'            => strtolower(Str::slug($this->slug) != "" ? Str::slug($this->slug) : Str::slug($this->title)),

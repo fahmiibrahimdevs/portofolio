@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('article_posts', function (Blueprint $table) {
             $table->id();
             $table->text('user_id');
+            $table->text('category_id');
             $table->text('sub_category_id');
+            $table->text('thumbnail')->nullable();
             $table->text('date')->default(date('Y-m-d'));
             $table->text('title');
             $table->text('slug');

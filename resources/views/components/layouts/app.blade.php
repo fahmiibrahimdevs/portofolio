@@ -9,8 +9,7 @@
     <!-- General CSS Files -->
     <link rel="icon" type="image/png" href="{{ asset('icons/MIDRAGON.png') }}">
     <link rel="stylesheet" href="{{ asset('/assets/stisla/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.7.2/css/all.css">
-    <link rel="stylesheet" href="https://static.fontawesome.com/css/fontawesome-app.css" />
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/all.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/midragon/css/custom.css') }}">
 
     @stack('general-css')
@@ -84,7 +83,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown {{ request()->is('module/projects/project') ? 'active' : '' }}">
+                        <li
+                            class="nav-item dropdown {{ request()->is('module/projects/category') || request()->is('module/projects/sub-category') || request()->is('module/projects/tag') || request()->is('module/projects/project') ? 'active' : '' }}">
                             <a href="#" data-toggle="dropdown" class="nav-link has-dropdown">
                                 <i class="far fa-project-diagram"></i><span>Projects</span>
                             </a>
@@ -96,7 +96,10 @@
                                     class="nav-item {{ request()->is('module/projects/sub-category') ? 'active' : '' }}">
                                     <a href="/module/projects/sub-category" class="nav-link">Sub-Category</a>
                                 </li>
-                                <li class="nav-item {{ request()->is('module/projects/posts') ? 'active' : '' }}">
+                                <li class="nav-item {{ request()->is('module/projects/tag') ? 'active' : '' }}">
+                                    <a href="/module/projects/tag" class="nav-link">Tag</a>
+                                </li>
+                                <li class="nav-item {{ request()->is('module/projects/project') ? 'active' : '' }}">
                                     <a href="/module/projects/project" class="nav-link">Project</a>
                                 </li>
                             </ul>
@@ -212,14 +215,9 @@
 
     <!-- General JS Scripts -->
     <script src="{{ asset('/assets/midragon/select2/jquery.min.js') }}"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+    <script src="{{ asset('assets/midragon/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/midragon/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/midragon/js/jquery.nicescroll.min.js') }}"></script>
 
     <!-- JS Libraies -->
     <script src="{{ asset('assets/midragon/js/sweetalert2@11.js') }}"></script>

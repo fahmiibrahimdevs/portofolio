@@ -6,11 +6,10 @@
                 <div id="typing-effect"
                     class="tw-text-2xl tw-h-16 lg:tw-h-8 tw-font-bold tw-mt-2 tw-leading-relaxed tw-tracking-wide">
                 </div>
-                <p class="tw-mt-10 tw-text-sm lg:tw-text-base tw-text-gray-300 tw-leading-relaxed tw-tracking-wide">
+                <p class="tw-mt-10 tw-text-sm lg:tw-text-base tw-text-white tw-tracking-wide">
                     Software Engineer with experience in developing applications integrated with IoT hardware. Adept in
-                    application design, server-side development, and technical problem-solving.
-
-                    Committed to continuous learning and innovation, with a passion for tackling new challenges in the
+                    application design, server-side development, and technical problem-solving. Committed to continuous
+                    learning and innovation, with a passion for tackling new challenges in the
                     tech industry.
                 </p>
                 <div class="tw-mt-10 tw-flex">
@@ -25,12 +24,12 @@
             </div>
             <div class="tw-hidden md:tw-hidden lg:tw-block">
                 <div class="tw-ml-20">
-                    <img class="tw-w-12/12 tw-rounded-full" src="http://192.168.18.104:8081/icons/my-photo2.png" alt="">
+                    <img class="tw-w-12/12 tw-rounded-full" src="{{ asset('icons/my-photo2.png') }}" alt="">
 
                 </div>
             </div>
         </div>
-        <div class="tw-mt-16 tw-px-4 md:tw-px-4 lg:tw-mt-20 lg:tw-px-0">
+        <div class="tw-mt-16 tw-px-4 md:tw-px-4 lg:tw-px-0">
             <h4 class="tw-mt-3 tw-text-lg lg:tw-text-xl tw-font-medium tw-leading-6 tw-text-cyan-300">
                 Work Experience
             </h4>
@@ -266,7 +265,7 @@
                 </div>
             </div>
         </div>
-        <div class="tw-mt-16 tw-px-4 md:tw-px-4 lg:tw-px-0 lg:tw-mt-20">
+        <div class="tw-mt-16 tw-px-4 md:tw-px-4 lg:tw-mt-20 lg:tw-px-0">
             <div class="tw-flex tw-justify-between">
                 <h4 class="tw-mt-3 tw-text-lg lg:tw-text-xl tw-font-medium tw-leading-6 tw-text-cyan-300">Latest
                     Projects</h4>
@@ -275,180 +274,69 @@
                     All Projects</a>
             </div>
             <div class="tw-mt-5 tw-grid tw-grid-cols-1 lg:tw-grid-cols-4 tw-gap-4 tw-text-wide">
+                @foreach ($projects as $project)
                 <div
-                    class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-900 tw-rounded-xl tw-shadow tw-shadow-slate-900">
+                    class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-900 tw-rounded-xl tw-shadow tw-shadow-slate-900 tw-flex tw-flex-col">
                     <div class="tw-p-4">
-                        <img src="https://mycoding.id/storage/covers/342.PNG?v=1" class="tw-rounded-xl" alt="">
-                    </div>
-                    <hr class="tw-border-dashed tw-border-slate-800 tw-border-[1.5px]">
-                    <div class="tw-p-4 tw-text-center">
-                        <p class="tw-font-medium tw-text-base tw-tracking-wide">Aplikasi Computer
-                            Based Test Online Berbasis Web
-                        </p>
-                        <p class="tw-mt-3 tw-mb-2">
-                            <span class="tw-bg-gray-800 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm">Backend</span>
-                        </p>
-                    </div>
-                    <hr class="tw-border-slate-800 lg:tw-border-slate-900">
-                    <div class="tw-p-4 tw-flex tw-justify-between">
-                        <a href="#" class="tw-bg-sky-600 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide hover:tw-bg-sky-800">Live Demo</a>
-                        <a href="#" class="tw-bg-gray-600 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide hover:tw-bg-gray-800">Detail</a>
-                    </div>
-                </div>
-                <div
-                    class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-900 tw-rounded-xl tw-shadow tw-shadow-slate-900">
-                    <div class="tw-p-4">
-                        <img src="{{ asset('/images/App_Robot_Token.png') }}" class="tw-rounded-xl" alt="">
-                    </div>
-                    <hr class="tw-border-dashed tw-border-slate-800 tw-border-[1.5px]">
-                    <div class="tw-p-4 tw-text-center">
-                        <p class="tw-font-medium tw-text-base tw-tracking-wide">Aplikasi Robot Token dengan MQTT
-                            (IoT)</p>
-                        <p class="tw-mt-3 tw-mb-2">
-                            <span class="tw-bg-gray-800 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm">Internet Of
-                                Things</span>
-                        </p>
-                    </div>
-                    <hr class="tw-border-slate-800 lg:tw-border-slate-900">
-                    <div class="tw-p-4 tw-flex tw-justify-between">
-                        <a href="#" class="tw-bg-sky-600 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide hover:tw-bg-sky-800">Live Demo</a>
-                        <a href="#" class="tw-bg-gray-600 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide hover:tw-bg-gray-800">Detail</a>
-                    </div>
-                </div>
-                <div
-                    class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-900 tw-rounded-xl tw-shadow tw-shadow-slate-900">
-                    <div class="tw-p-4">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOEmUhZ9r-MhqjQlIuByaCD5O0aTnidf8-7MzFE9DrAwZpsEpTDUy1-sEWVX0VvoD6hE4yF7e81Zv9JImtSF68ExLdvUlF1iFp5V9c5dEieGItLbuYSa2iwNnuArUpdYiG2mvNYUvljd9g/w0/Iot_web_dashboard.png"
+                        <img src="{{ $project->thumbnail != NULL ? asset('storage/'. $project->thumbnail) : asset('images/default-image.jpg') }}"
                             class="tw-rounded-xl" alt="">
                     </div>
                     <hr class="tw-border-dashed tw-border-slate-800 tw-border-[1.5px]">
-                    <div class="tw-p-4 tw-text-center">
-                        <p class="tw-font-medium tw-text-base tw-tracking-wide">Aplikasi Monitoring
-                            KwH 3 Phase (IoT)</p>
-                        <p class="tw-mt-3 tw-mb-2">
-                            <span class="tw-bg-gray-800 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm">Internet Of
-                                Things</span>
+                    <div class="tw-p-4 tw-text-center tw-flex tw-flex-col tw-flex-grow">
+                        <p class="tw-font-medium tw-text-base tw-tracking-wide">{{ $project->title }}</p>
+                        <p class="tw-mt-3">
+                            <span
+                                class="tw-bg-gray-800 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm">{{ $project->sub_category_name }}</span>
                         </p>
                     </div>
                     <hr class="tw-border-slate-800 lg:tw-border-slate-900">
-                    <div class="tw-p-4 tw-flex tw-justify-between">
-                        <a href="#" class="tw-bg-sky-600 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide hover:tw-bg-sky-800">Live Demo</a>
-                        <a href="#" class="tw-bg-gray-600 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide hover:tw-bg-gray-800">Detail</a>
+                    <div class="tw-p-4 tw-flex tw-mt-auto tw-justify-between">
+                        <a href="{{ $project->link_demo }}" target="_BLANK"
+                            class="tw-bg-sky-600 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide hover:tw-bg-sky-800">Live
+                            Demo</a>
+                        <a href="{{ url('project/' . $project->slug) }}" target="_BLANK"
+                            class="tw-bg-gray-600 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide hover:tw-bg-gray-800">Detail</a>
                     </div>
                 </div>
-                <div
-                    class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-900 tw-rounded-xl tw-shadow tw-shadow-slate-900">
-                    <div class="tw-p-4">
-                        <img src="https://mycoding.id/storage/covers/46.jpg" class="tw-rounded-xl" alt="">
-                    </div>
-                    <hr class="tw-border-dashed tw-border-slate-800 tw-border-[1.5px]">
-                    <div class="tw-p-4 tw-text-center">
-                        <p class="tw-font-medium tw-text-base tw-tracking-wide">Aplikasi Point Of
-                            Sales Berbasis Web</p>
-                        <p class="tw-mt-3 tw-mb-2">
-                            <span class="tw-bg-gray-800 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm">Backend</span>
-                        </p>
-                    </div>
-                    <hr class="tw-border-slate-800 lg:tw-border-slate-900">
-                    <div class="tw-p-4 tw-flex tw-justify-between">
-                        <a href="#" class="tw-bg-sky-600 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide hover:tw-bg-sky-800">Live Demo</a>
-                        <a href="#" class="tw-bg-gray-600 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide hover:tw-bg-gray-800">Detail</a>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
         <div class="tw-mt-16 tw-px-4 md:tw-px-4 lg:tw-px-0">
             <div class="tw-flex tw-justify-between">
-                <h4 class="tw-mt-3 tw-text-lg lg:tw-text-xl tw-font-medium tw-leading-6 tw-text-cyan-300">Latest Article</h4>
+                <h4 class="tw-mt-3 tw-text-lg lg:tw-text-xl tw-font-medium tw-leading-6 tw-text-cyan-300">Latest Article
+                </h4>
                 <a href="{{ url('/articles') }}"
                     class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-800 tw-shadow tw-shadow-slate-800 tw-px-4 tw-py-1 tw-rounded-full tw-text-base tw-tracking-wide tw-mt-4">See
                     All Articles</a>
             </div>
             <div class="tw-mt-5 tw-grid tw-grid-cols-1 lg:tw-grid-cols-4 tw-gap-4 tw-text-wide">
-                <a href="#"
+                @foreach($articles as $article)
+                <a href="{{ url('article/' . $article->slug) }}"
                     class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-900 tw-rounded-xl tw-shadow tw-shadow-slate-900">
                     <div class="tw-p-4">
-                        <img src="https://rajacoding.com/files/artikel/thumb_E7jJuMiKmmc2xJ1iyDDppdZ1zzcGrgQjS7ZrmqEU.png" class="tw-rounded-xl" alt="">
+                        <img src="{{ $article->thumbnail != NULL ? asset('storage/'. $article->thumbnail) : asset('images/default-image.jpg') }}"
+                            class="tw-rounded-xl" alt="">
                     </div>
                     <hr class="tw-border-dashed tw-border-slate-800 tw-border-[1.5px]">
                     <div class="tw-p-4 tw-text-center">
                         <p class="">
-                            <span class="tw-bg-gray-800 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm">Git</span>
+                            <span
+                                class="tw-bg-gray-800 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm">{{ $article->category_name }}</span>
                         </p>
-                        <p class="tw-mt-3 tw-mb-2 tw-font-medium tw-text-base tw-tracking-wide">Panduan Lengkap Menggunakan Git dan GitHub untuk Kolaborasi Proyek Pemrograman</p>
+                        <p class="tw-mt-3 tw-mb-2 tw-font-medium tw-text-base tw-tracking-wide">{{ $article->title }}
+                        </p>
                     </div>
                     <hr class="tw-border-slate-800 lg:tw-border-slate-900">
                     <div class="tw-p-4 tw-flex">
                         <img src="{{ asset('icons/my-photo2.png') }}" class="tw-rounded-full tw-w-10 tw-h-10">
                         <div class="tw-ml-3">
                             <p class="tw-font-bold tw-text-base tw-text-gray-200">Fahmi Ibrahim</p>
-                            <p class="tw-text-sm tw-text-gray-300">08/09/2024 • 631 views</p>
+                            <p class="tw-text-sm tw-text-gray-300">
+                                {{ \Carbon\Carbon::parse($article->date)->format('d M Y') }} • 631 views</p>
                         </div>
                     </div>
                 </a>
-                <a href="#"
-                    class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-900 tw-rounded-xl tw-shadow tw-shadow-slate-900">
-                    <div class="tw-p-4">
-                        <img src="https://rajacoding.com/files/artikel/thumb_80DMZPgy85VLzFE2Z0WOclrwr970yqbCTa1RyZKA.png" class="tw-rounded-xl" alt="">
-                    </div>
-                    <hr class="tw-border-dashed tw-border-slate-800 tw-border-[1.5px]">
-                    <div class="tw-p-4 tw-text-center">
-                        <p class="">
-                            <span class="tw-bg-gray-800 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm">Framework7</span>
-                        </p>
-                        <p class="tw-mt-3 tw-mb-2 tw-font-medium tw-text-base tw-tracking-wide">Mengoptimalkan Kinerja Aplikasi Mobile dengan Teknik Pemrograman Asinkron</p>
-                    </div>
-                    <hr class="tw-border-slate-800 lg:tw-border-slate-900">
-                    <div class="tw-p-4 tw-flex">
-                        <img src="{{ asset('icons/my-photo2.png') }}" class="tw-rounded-full tw-w-10 tw-h-10">
-                        <div class="tw-ml-3">
-                            <p class="tw-font-bold tw-text-base tw-text-gray-200">Fahmi Ibrahim</p>
-                            <p class="tw-text-sm tw-text-gray-300">08/09/2024 • 631 views</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="#"
-                    class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-900 tw-rounded-xl tw-shadow tw-shadow-slate-900">
-                    <div class="tw-p-4">
-                        <img src="https://rajacoding.com/files/artikel/thumb_N1QHslZKnH9cG5DGJ1rqE7AhXVN9Bz4JrFYsVYY5.png" class="tw-rounded-xl" alt="">
-                    </div>
-                    <hr class="tw-border-dashed tw-border-slate-800 tw-border-[1.5px]">
-                    <div class="tw-p-4 tw-text-center">
-                        <p class="">
-                            <span class="tw-bg-gray-800 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm">PHP</span>
-                        </p>
-                        <p class="tw-mt-3 tw-mb-2 tw-font-medium tw-text-base tw-tracking-wide">Teknik-teknik Pemrograman Responsif untuk Desain Web yang Mengagumkan di Semua Perangkat</p>
-                    </div>
-                    <hr class="tw-border-slate-800 lg:tw-border-slate-900">
-                    <div class="tw-p-4 tw-flex">
-                        <img src="{{ asset('icons/my-photo2.png') }}" class="tw-rounded-full tw-w-10 tw-h-10">
-                        <div class="tw-ml-3">
-                            <p class="tw-font-bold tw-text-base tw-text-gray-200">Fahmi Ibrahim</p>
-                            <p class="tw-text-sm tw-text-gray-300">08/09/2024 • 631 views</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="#"
-                    class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-900 tw-rounded-xl tw-shadow tw-shadow-slate-900">
-                    <div class="tw-p-4">
-                        <img src="https://rajacoding.com/files/artikel/thumb_x8ECcpZH56ENHGpR7GJZ2qJdHQ7CeQMIszmUTQX5.png" class="tw-rounded-xl" alt="">
-                    </div>
-                    <hr class="tw-border-dashed tw-border-slate-800 tw-border-[1.5px]">
-                    <div class="tw-p-4 tw-text-center">
-                        <p class="">
-                            <span class="tw-bg-gray-800 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm">PHP</span>
-                        </p>
-                        <p class="tw-mt-3 tw-mb-2 tw-font-medium tw-text-base tw-tracking-wide">Pemrograman Fungsional vs. Obyektif: Kelebihan dan Kekurangan Kedua Pendekatan</p>
-                    </div>
-                    <hr class="tw-border-slate-800 lg:tw-border-slate-900">
-                    <div class="tw-p-4 tw-flex">
-                        <img src="{{ asset('icons/my-photo2.png') }}" class="tw-rounded-full tw-w-10 tw-h-10">
-                        <div class="tw-ml-3">
-                            <p class="tw-font-bold tw-text-base tw-text-gray-200">Fahmi Ibrahim</p>
-                            <p class="tw-text-sm tw-text-gray-300">08/09/2024 • 631 views</p>
-                        </div>
-                    </div>
-                </a>
+                @endforeach
             </div>
         </div>
     </div>

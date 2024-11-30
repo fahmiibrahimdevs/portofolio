@@ -16,12 +16,12 @@ class UploadController extends Controller
         $file = $request->file('file');
         $ext = $file->getClientOriginalExtension();
 
-        $directory = 'public/files/';
+        $directory = 'public/';
         switch ($ext) {
             case 'jpg':
             case 'jpeg':
             case 'png':
-                $directory .= 'images/';
+                $directory .= 'image/';
                 break;
             default:
                 $directory .= 'misc/';

@@ -10,7 +10,7 @@ use App\Models\ArticleCategory;
 class Category extends Component
 {
     use WithPagination;
-    #[Title('Category')]
+    #[Title('Article - Category')]
     protected $paginationTheme = 'bootstrap';
 
     protected $listeners = [

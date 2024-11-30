@@ -29,7 +29,10 @@
     }
     ol,
     ol > li {
-        margin-top: 10px;
+        /* margin-top: 10px; */
+    }
+    a {
+        @apply !tw-no-underline;
     }
 }
 
@@ -219,5 +222,13 @@
 
     .navbar.navbar-expand-lg.main-navbar {
         @apply tw-px-0 lg:tw-px-5;
+    }
+
+    .hide-scrollbar {
+        scrollbar-width: none; /* Untuk Firefox */
+    }
+    
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none; /* Untuk Chrome, Safari, dan Edge */
     }
 }

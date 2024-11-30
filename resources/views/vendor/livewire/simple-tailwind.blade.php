@@ -1,56 +1,59 @@
-@php
-if (! isset($scrollTo)) {
-    $scrollTo = 'body';
-}
-
-$scrollIntoViewJsSnippet = ($scrollTo !== false)
-    ? <<<JS
-       (\$el.closest('{$scrollTo}') || document.querySelector('{$scrollTo}')).scrollIntoView()
-    JS
-    : '';
-@endphp
-
 <div>
     @if ($paginator->hasPages())
-        <nav role="navigation" aria-label="Pagination Navigation" class="flex justify-between">
-            <span>
-                {{-- Previous Page Link --}}
-                @if ($paginator->onFirstPage())
-                    <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md dark:text-gray-600 dark:bg-gray-800 dark:border-gray-600">
-                        {!! __('pagination.previous') !!}
-                    </span>
-                @else
-                    @if(method_exists($paginator,'getCursorName'))
-                        <button type="button" dusk="previousPage" wire:key="cursor-{{ $paginator->getCursorName() }}-{{ $paginator->previousCursor()->encode() }}" wire:click="setPage('{{$paginator->previousCursor()->encode()}}','{{ $paginator->getCursorName() }}')" x-on:click="{{ $scrollIntoViewJsSnippet }}" wire:loading.attr="disabled" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-blue-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300">
-                                {!! __('pagination.previous') !!}
-                        </button>
-                    @else
-                        <button
-                            type="button" wire:click="previousPage('{{ $paginator->getPageName() }}')" x-on:click="{{ $scrollIntoViewJsSnippet }}" wire:loading.attr="disabled" dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-blue-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300">
-                                {!! __('pagination.previous') !!}
-                        </button>
-                    @endif
-                @endif
-            </span>
+    <nav class="tw-block tw-text-center lg:tw-flex">
+        <div class="tw-mt-5 tw-mb-5 lg:tw-mb-0 tw-text-base">
+            Showing {{ ($paginator->currentPage() - 1) * $paginator->perPage() + 1 }}
+            to {{ ($paginator->currentPage() - 1) * $paginator->perPage() + count($paginator->items()) }}
+            of {{ $paginator->total() }} entries
+        </div>
+        <ul class="pagination tw-justify-center lg:tw-ml-auto">
+            {{-- Previous Page Link --}}
+            @if ($paginator->onFirstPage())
+            <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
+                <span class="page-link dark:tw-bg-slate-600" aria-hidden="true">&lsaquo;</span>
+            </li>
+            @else
+            <li class="page-item">
+                <button type="button"
+                    dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}"
+                    class="page-link dark:tw-bg-slate-800" wire:click="previousPage('{{ $paginator->getPageName() }}')"
+                    wire:loading.attr="disabled" rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</button>
+            </li>
+            @endif
 
-            <span>
+            {{-- Pagination Elements --}}
+            @foreach ($elements as $element)
+            {{-- Array Of Links --}}
+            @if (is_array($element))
+            @php
+            $pageNumber = ($paginator->currentPage() - 1) * $paginator->perPage();
+            @endphp
+            @foreach ($element as $page => $url)
+            @if ($page >= $paginator->currentPage() - 2 && $page <= $paginator->currentPage() + 2)
+                <li class="page-item {{ $page == $paginator->currentPage() ? 'active' : '' }}"
+                    wire:key="paginator-{{ $paginator->getPageName() }}-page-{{ $page }}">
+                    <button type="button" class="page-link dark:tw-bg-slate-800 dark:tw-border dark:tw-border-slate-800"
+                        wire:click="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')">{{ $page }}</button>
+                </li>
+                @endif
+                @endforeach
+                @endif
+                @endforeach
+
                 {{-- Next Page Link --}}
                 @if ($paginator->hasMorePages())
-                    @if(method_exists($paginator,'getCursorName'))
-                        <button type="button" dusk="nextPage" wire:key="cursor-{{ $paginator->getCursorName() }}-{{ $paginator->nextCursor()->encode() }}" wire:click="setPage('{{$paginator->nextCursor()->encode()}}','{{ $paginator->getCursorName() }}')" x-on:click="{{ $scrollIntoViewJsSnippet }}" wire:loading.attr="disabled" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-blue-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300">
-                                {!! __('pagination.next') !!}
-                        </button>
-                    @else
-                        <button type="button" wire:click="nextPage('{{ $paginator->getPageName() }}')" x-on:click="{{ $scrollIntoViewJsSnippet }}" wire:loading.attr="disabled" dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-blue-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300">
-                                {!! __('pagination.next') !!}
-                        </button>
-                    @endif
+                <li class="page-item">
+                    <button type="button"
+                        dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}"
+                        class="page-link dark:tw-bg-slate-800" wire:click="nextPage('{{ $paginator->getPageName() }}')"
+                        wire:loading.attr="disabled" rel="next" aria-label="@lang('pagination.next')">&rsaquo;</button>
+                </li>
                 @else
-                    <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md">
-                        {!! __('pagination.next') !!}
-                    </span>
+                <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
+                    <span class="page-link dark:tw-bg-slate-600" aria-hidden="true">&rsaquo;</span>
+                </li>
                 @endif
-            </span>
-        </nav>
+        </ul>
+    </nav>
     @endif
 </div>
