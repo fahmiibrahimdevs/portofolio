@@ -37,7 +37,8 @@
                 <img src="{{ asset('icons/Intek.png') }}" class="tw-w-14 lg:tw-w-20 tw-rounded-full tw-mr-5 mt-[-10px]"
                     alt="">
                 <div>
-                    <p class="tw-font-medium tw-text-base lg:tw-text-lg">RnD - Mechatronics</p>
+                    <p class="tw-font-medium tw-text-base lg:tw-text-lg">Intern - Mechatronics Research & Development
+                    </p>
                     <p class="tw-text-sm tw-text-gray-300 tw-mt-1">
                         <a href="https://intek.co.id/id/" target="_blank">
                             PT. Solusi Intek Indonesia
@@ -53,12 +54,18 @@
             <div class="tw-text-gray-300 tw-ml-16 lg:tw-ml-24 tw-text-[13px] lg:tw-text-sm" style="display: none;"
                 id="description-see-more">
                 <ul class="tw-list-disc tw-mt-3 tw-space-y-2">
-                    <li>Contributed to IoT research and development.</li>
-                    <li>Managed server maintenance, domain administration, application development, and database
-                        optimization.</li>
-                    <li>Handled hardware, software, and network troubleshooting.</li>
-                    <li>Performed version control and documentation. </li>
-                    <li>Developed electronic circuits, soldered components, and programmed microcontrollers.</li>
+                    <li>Contributed to Internet of Things (IoT) research and prototype development, including sensor
+                        integration and data communication.</li>
+                    <li>Managed server infrastructure, performed domain and DNS administration, and conducted routine
+                        maintenance to ensure application availability.</li>
+                    <li>Developed web-based applications and optimized database performance for better scalability and
+                        efficiency.</li>
+                    <li>Diagnosed and resolved hardware, software, and network issues to maintain smooth system
+                        operations. </li>
+                    <li>Utilized version control systems (e.g., Git) and maintained comprehensive technical
+                        documentation throughout the development lifecycle.</li>
+                    <li>Designed and assembled electronic circuits, performed precise soldering, and programmed
+                        microcontrollers (e.g., Arduino, ESP8266, ESP32) for various embedded systems projects.</li>
                 </ul>
             </div>
         </div>

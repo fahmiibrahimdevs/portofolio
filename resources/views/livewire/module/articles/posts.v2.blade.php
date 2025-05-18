@@ -382,16 +382,53 @@
                 onPaste: function (e) {
                     e.preventDefault();
                     var clipboardData = (e.originalEvent || e).clipboardData;
-                    var text = clipboardData.getData('text/plain');
-                    var containsPreHljs = /<pre\s+class="hljs"[^>]*>[^]*?<\/pre>/i.test(text);
+                    var htmlData = clipboardData.getData('text/html');
 
-                    if (containsPreHljs) {
-                        document.execCommand('insertHTML', false, '<p>' + text + '</p>');
-                    } else {
-                        text = text.replace(/-([a-zA-Z0-9\-_]+)-/g, function (match, p1) {
-                            return '<span id="codeselector">' + p1 + '</span>';
+                    if (htmlData) {
+                        var tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = htmlData;
+
+                        // Bersihkan semua attribute data-* dan class
+                        tempDiv.querySelectorAll('*').forEach(function(el) {
+                            [...el.attributes].forEach(attr => {
+                                if (attr.name.startsWith('data-') || attr.name === 'class') {
+                                    el.removeAttribute(attr.name);
+                                }
+                            });
                         });
-                        document.execCommand('insertHTML', false, '<p>' + text + '</p>');
+
+                        // Ini array buat menampung hasil baru
+                        var newHtml = '';
+
+                        tempDiv.childNodes.forEach(function(node) {
+                            if (node.nodeType === Node.ELEMENT_NODE) {
+                                var outer = node.outerHTML;
+
+                                // Jika node adalah heading (h1, h2, h3, h4, h5, h6)
+                                if (['H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(node.tagName)) {
+                                    newHtml += outer;
+                                    newHtml += '<p style="line-height: 1;"><br></p>';
+                                }
+                                // Jika node adalah paragraph <p>
+                                else if (node.tagName === 'P') {
+                                    // Jika isi <p> kosong
+                                    if (node.innerHTML.trim() === '') {
+                                        // Skip kosong
+                                    } else {
+                                        newHtml += outer;
+                                        newHtml += '<p style="line-height: 3;"><br></p>';
+                                    }
+                                }
+                                else {
+                                    newHtml += outer;
+                                }
+                            }
+                        });
+
+                        document.execCommand('insertHTML', false, newHtml);
+                    } else {
+                        var textData = clipboardData.getData('text/plain');
+                        document.execCommand('insertText', false, textData);
                     }
                 },
                 onInit: function () {

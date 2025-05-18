@@ -103,8 +103,16 @@
         @apply tw-text-yellow-300;
     }
 
+    #isi-catatan div > span > h2 {
+        @apply tw-mb-5 tw-mt-[-5px] lg:tw-mt-3 tw-text-2xl;
+    }
+
+    #isi-catatan div > span > p {
+        @apply tw-mt-3;
+    }
+
     #isi-catatan h3 > b {
-        @apply tw-text-cyan-300;
+        @apply tw-text-orange-400;
     }
 
     #isi-catatan h4 > b {
@@ -120,7 +128,7 @@
     }
 
     #isi-catatan pre.hljs {
-        @apply !tw-bg-[hsl(225,64%,11%)] lg:!tw-bg-[hsl(233,58%,8%)] !tw-text-sm !tw-leading-loose !tw-px-4 lg:!tw-px-5 !tw-py-4 !tw-rounded-none lg:!tw-rounded-lg !tw-font-semibold lg:!tw-font-normal !no-scrollbar !tw-mx-[-18px] !tw-tracking-normal;
+        @apply !tw-bg-[hsl(228,56%,11%)] lg:!tw-bg-[hsl(227,59%,8%)] !tw-mt-3 !tw-text-sm !tw-leading-loose !tw-px-4 lg:!tw-px-5 !tw-py-4 !tw-rounded-none lg:!tw-rounded-lg !tw-font-semibold lg:!tw-font-normal !no-scrollbar !tw-mx-[-18px] lg:!tw-mx-0 !tw-tracking-normal;
     }
 
     .no-scrollbar {

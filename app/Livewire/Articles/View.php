@@ -2,8 +2,9 @@
 
 namespace App\Livewire\Articles;
 
-use App\Models\ArticlePost;
+use Carbon\Carbon;
 use Livewire\Component;
+use App\Models\ArticlePost;
 
 class View extends Component
 {
@@ -11,6 +12,7 @@ class View extends Component
 
     public function mount($slug)
     {
+        Carbon::setLocale('id');
         $data = ArticlePost::select('*')->where('slug', $slug)->firstOrFail();
         $this->date = $data->date ?? "";
         $this->title = $data->title ?? "";

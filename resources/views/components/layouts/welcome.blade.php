@@ -14,8 +14,25 @@
             height: auto;
         }
 
+        @font-face {
+            font-family: 'Trebuchet MS';
+            src: url('/assets/trebuchet-ms/trebuc.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+        #isi-catatan pre.hljs {
+            font-family: 'Jetbrains Mono', monospace;
+        }
+
+        #isi-catatan code {
+            font-family: 'Jetbrains Mono', monospace;
+        }
+
     </style>
-    <link rel="icon" type="image/png" href="{{ asset('icons/MIDRAGON.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('icons/NEXARYN.png') }}">
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/all.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/katex/katex.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/flowbite/flowbite.min.css') }}" />
@@ -33,8 +50,8 @@
         class="tw-fixed tw-w-full tw-mt-0 tw-top-0 tw-text-gray-100 tw-flex tw-justify-between lg:tw-hidden drop-shadow-lg tw-z-[20]">
         <!-- Logo -->
         <a href="{{ url('/') }}" class="tw-p-4 tw-text-white tw-font-bold tw-flex">
-            <img src="{{ asset('icons/MIDRAGON.png') }}" class="tw-w-5 tw-h-5">
-            <span class="tw-font-bold tw-uppercase tw-tracking-widest tw-ml-2">MIDRAGON</span>
+            <img src="{{ asset('icons/NEXARYN.png') }}" class="tw-w-10 tw-h-10">
+            <span class="tw-font-bold tw-uppercase tw-tracking-widest tw-mt-2 tw-ml-2">NEXARYN</span>
         </a>
         <!-- Mobile menu button -->
         <button class="mobile-menu-button tw-p-4 focus:tw-outline-none md:tw-hidden">
@@ -50,8 +67,8 @@
         <!-- logo -->
         <div class="tw-px-4 tw-pt-4 tw-flex tw-justify-center">
             <a href="#" class="tw-flex tw-space-x-2">
-                <img src="{{ asset('icons/MIDRAGON.png') }}" class="tw-w-5 tw-h-5">
-                <span class="tw-font-extrabold tw-uppercase tw-tracking-widest">MIDRAGON</span>
+                <img src="{{ asset('icons/NEXARYN.png') }}" class="tw-w-10 tw-h-10">
+                <span class="tw-font-extrabold tw-uppercase tw-mt-2 tw-tracking-widest">NEXARYN</span>
             </a>
         </div>
 
@@ -113,8 +130,8 @@
             <a href="{{ url('/') }}" class="text-cyan-200 tw-tracking-widest tw-text-xl tw-font-bold">
                 <div
                     class="tw-inline-flex hover:tw-bg-gray-900 hover:tw-rounded-lg hover:tw-px-3 hover:tw-py-2 tw-mt-2">
-                    <img src="{{ asset('icons/MIDRAGON.png') }}" class="tw-w-8 tw-h-8 tw-rounded-full">
-                    <div class="tw-text-xs tw-tracking-wider tw-font-medium">
+                    <img src="{{ asset('icons/NEXARYN.png') }}" class="tw-w-10 tw-h-10 tw-rounded-full">
+                    <div class="tw-text-xs tw-tracking-wider tw-font-medium tw-mt-1">
                         <p class="tw-ml-3 tw-text-cyan-400">Fahmi Ibrahim</p>
                         <p class="tw-ml-3">@fhmiibrhimdev</p>
                     </div>
@@ -173,7 +190,7 @@
                             class="fab fa-linkedin tw-text-2xl"></i></a>
                 </div>
                 <div id="copyright" class="tw-text-sm">
-                    <p>&copy; 2023 Midragon. All rights reserved.</p>
+                    <p>&copy; 2023 NEXARYN. All rights reserved.</p>
                 </div>
             </div>
         </footer>
