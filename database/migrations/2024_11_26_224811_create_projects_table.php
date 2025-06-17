@@ -26,6 +26,7 @@ return new class extends Migration
             $table->enum('status_publish', ['Published', 'Privated', 'Draft']);
             $table->text('version')->default('1.0.0');
             $table->text('link_demo')->default('-');
+            $table->text('link_github')->default('-');
             $table->timestamps();
         });
     }

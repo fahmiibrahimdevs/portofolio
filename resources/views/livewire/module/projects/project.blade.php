@@ -206,7 +206,7 @@
                                     @enderror
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="version">Version</label>
                                             <input type="text" wire:model="version" id="version" class="form-control">
@@ -215,11 +215,20 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="link_demo">Link Demo</label>
                                             <input type="text" wire:model="link_demo" id="link_demo" class="form-control">
                                             @error('link_demo')
+                                            <small class='text-danger'>{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="link_github">Link Github</label>
+                                            <input type="text" wire:model="link_github" id="link_github" class="form-control">
+                                            @error('link_github')
                                             <small class='text-danger'>{{ $message }}</small>
                                             @enderror
                                         </div>

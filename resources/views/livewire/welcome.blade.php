@@ -46,7 +46,7 @@
                         • 3 June 2022 - 10 February 2024 • 1year 9mon
                     </p>
                     <div class="tw-flex tw-items-center tw-text-sm tw-text-cyan-300 tw-mt-5">
-                        <button class="tw-mr-2" id="see-more">See More </button>
+                        <button class="tw-mr-2 see-more" data-target="description-see-more">See More </button>
                         <i class="fas fa-angle-right"></i>
                     </div>
                 </div>
@@ -67,6 +67,53 @@
                     <li>Designed and assembled electronic circuits, performed precise soldering, and programmed
                         microcontrollers (e.g., Arduino, ESP8266, ESP32) for various embedded systems projects.</li>
                 </ul>
+                <div class="tw-flex">
+                    <img src="" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="tw-mt-16 tw-px-4 md:tw-px-4 lg:tw-mt-20 lg:tw-px-0">
+            <h4 class="tw-mt-3 tw-text-lg lg:tw-text-xl tw-font-medium tw-leading-6 tw-text-cyan-300">
+                University Achievements
+            </h4>
+            <div class="tw-flex tw-items-start tw-mt-8">
+                <img src="{{ asset('icons/PNJ.png') }}" class="tw-w-14 lg:tw-w-20 tw-rounded-full tw-mr-5 mt-[-10px]"
+                    alt="">
+                <div>
+                    <p class="tw-font-medium tw-text-base lg:tw-text-lg">Politeknik Negeri Jakarta
+                    </p>
+                    <p class="tw-text-sm tw-text-gray-300 tw-mt-1">
+                        Associate’s Degree – Industrial Electronics Engineering
+                        • Aug 2024 – May 2025 (Year 1)
+                    </p>
+                    <div class="tw-flex tw-items-center tw-text-sm tw-text-cyan-300 tw-mt-5">
+                        <button class="tw-mr-2 see-more" data-target="description-see-more-2">See More </button>
+                        <i class="fas fa-angle-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="tw-text-gray-300 tw-ml-16 lg:tw-ml-24 tw-text-[13px] lg:tw-text-sm" style="display: none;"
+                id="description-see-more-2">
+                <p class="tw-mt-3 tw-space-y-2 tw-ml-3 lg:tw-ml-1 tw-text-cyan-300">Organizational Involvement:</p>
+                <ul class="tw-list-disc tw-mt-3 tw-space-y-2">
+                    <li>Active organization in KSM Psychorobotic</li>
+                </ul>
+                <p class="tw-mt-3 tw-space-y-2 tw-ml-3 lg:tw-ml-1 tw-text-cyan-300">Key Projects:</p>
+                <ul class="tw-list-disc tw-mt-3 tw-space-y-2">
+                    <li>Developed 3 company profile websites with Panolens.js (AEON MALL, KASABLANKA HALL, JCC).</li>
+                    <li>Created an RFID-based Web Attendance System.</li>
+                    <li>Developed a Film Project Management System web app.</li>
+                    <li>Built a 5V Power Supply with Custom Case.</li>
+                    <li>Designed and built a Scoreboard System with button controller.</li>
+                </ul>
+                <p class="tw-mt-3 tw-space-y-2 tw-ml-3 lg:tw-ml-1 tw-text-cyan-300">Skills Gained:</p>
+                <ul class="tw-list-disc tw-mt-3 tw-space-y-2">
+                    <li>Electronics fundamentals: Logic gates, components, PCB design.</li>
+                    <li>Web development, circuit building, microcontroller integration (IoT).</li>
+                </ul>
+                <div class="tw-flex">
+                    <img src="" alt="">
+                </div>
             </div>
         </div>
         <div class="tw-mt-16 tw-px-4 md:tw-px-4 lg:tw-mt-20 lg:tw-px-0">
@@ -350,16 +397,19 @@
 </div>
 @push('scripts')
 <script>
-    const seeMoreText = document.getElementById('see-more');
-    const descriptionSeeMore = document.getElementById('description-see-more');
-
-    seeMoreText.addEventListener('click', () => {
-        if (descriptionSeeMore.style.display === "none") {
-            descriptionSeeMore.style.display = "block";
-        } else {
-            descriptionSeeMore.style.display = "none";
-        }
-    })
+    // Ambil semua tombol dengan class .see-more
+    document.querySelectorAll('.see-more').forEach(button => {
+        button.addEventListener('click', () => {
+            const targetId = button.getAttribute('data-target');
+            const target = document.getElementById(targetId);
+            if (target) {
+                target.style.display = (target.style.display === "none" || target.style.display ===
+                        "") ?
+                    "block" :
+                    "none";
+            }
+        });
+    });
 
 </script>
 <script>

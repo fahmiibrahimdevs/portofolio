@@ -9,7 +9,8 @@
             <div class="tw-ml-0 lg:tw-ml-8">
                 <p class="tw-text-xl tw-text-cyan-300 tw-text-center lg:tw-text-left tw-mt-5 lg:tw-mt-0">
                     {{ $data->title }}</p>
-                <p class="tw-mt-5 tw-font-bold tw-text-3xl">Rp{{ $data->price }}</p>
+                    <div class="tw-mt-5">&nbsp;</div>
+                <!-- <p class="tw-mt-5 tw-font-bold tw-text-3xl">Rp{{ $data->price }}</p> -->
                 <div class="tw-mt-5">
                     <p class="tw-mt-4 tw-text-gray-400">Kategori: <b
                             class="tw-text-white">{{ $data->category_name }}</b></p>
@@ -20,13 +21,13 @@
                     <p class="tw-mt-4 tw-text-gray-400">Author: <b class="tw-text-white">{{ $data->name }}</b></p>
                 </div>
                 <div class="tw-flex tw-space-x-2 tw-mt-5">
-                    <button class="tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-border tw-border-cyan-300">
-                        <i class="fas fa-shopping-cart"></i>
-                        Buy
-                    </button>
+                    <a href="{{ $data->link_github }}" target="_BLANK" class="tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-border tw-border-cyan-300">
+                        <i class="fab fa-github" style="margin-right: 5px;"></i>
+                        Github
+                    </a>
                     <a href="{{ $data->link_demo }}" target="_BLANK"
                         class="tw-bg-cyan-300 tw-text-black tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-font-semibold">
-                        <i class="fas fa-eye"></i>
+                        <i class="far fa-eye" style="margin-right: 5px;"></i>
                         Demo
                     </a>
                 </div>

@@ -37,7 +37,7 @@ class Project extends Component
     public $previousSearchTerm = '';
     public $isEditing = false;
     public $categories, $subcategories, $tags;
-    public $dataId, $category_id, $sub_category_id, $tag_id, $thumbnail, $date, $title, $slug, $price, $description, $status_publish, $version, $link_demo;
+    public $dataId, $category_id, $sub_category_id, $tag_id, $thumbnail, $date, $title, $slug, $price, $description, $status_publish, $version, $link_demo, $link_github;
     public $text, $images;
 
     public function mount()
@@ -58,6 +58,7 @@ class Project extends Component
         $this->status_publish  = 'Draft';
         $this->version  = '1.0.0';
         $this->link_demo  = 'http://';
+        $this->link_github  = 'http://github.com';
     }
 
     public function addText()
@@ -144,14 +145,14 @@ class Project extends Component
     public function store()
     {
         $this->validate();
-    
+
         if ($this->thumbnail) {
             $thumbnailPath = $this->thumbnail->storeAs('thumbnails', Str::slug(pathinfo($this->thumbnail->getClientOriginalName(), PATHINFO_FILENAME))
-            . rand(0,999) . '.' . $this->thumbnail->getClientOriginalExtension(), 'public'); 
+                . rand(0, 999) . '.' . $this->thumbnail->getClientOriginalExtension(), 'public');
         } else {
             $thumbnailPath = null;
         }
-    
+
         $projects = ModelsProject::create([
             'user_id'          => Auth::user()->id,
             'category_id'      => $this->category_id,
@@ -166,12 +167,13 @@ class Project extends Component
             'status_publish'   => $this->status_publish,
             'version'          => $this->version,
             'link_demo'        => $this->link_demo,
+            'link_github'        => $this->link_github,
         ]);
 
         $project_image = [];
-        foreach($this->images as $image) {
-            $thumbnailPath = $image->storeAs('gallery-project', Str::slug(pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME)) 
-            . rand(0,999) . '.' . $image->getClientOriginalExtension(), 'public');
+        foreach ($this->images as $image) {
+            $thumbnailPath = $image->storeAs('gallery-project', Str::slug(pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME))
+                . rand(0, 999) . '.' . $image->getClientOriginalExtension(), 'public');
             $project_image[] = [
                 'project_id' => $projects->id,
                 'image'     => $thumbnailPath,
@@ -190,7 +192,7 @@ class Project extends Component
         }
 
         ProjectDetail::insert($project_detail);
-    
+
         $this->dispatchAlert('success', 'Success!', 'Data created successfully.');
         $this->resetInputFields();
     }
@@ -210,6 +212,7 @@ class Project extends Component
         $this->subcategories    = ProjectSubCategory::select('id', 'sub_category_name')->where('category_id', $this->category_id)->get()->toArray();
         $this->version            = $data->version;
         $this->link_demo            = $data->link_demo;
+        $this->link_github            = $data->link_github;
         $this->text = ProjectDetail::select('left_text', 'right_text')->where('project_id', $id)->get()->toArray();
         $this->tag_id = explode(',', $data->tag_id);
         $this->dispatch('initSelect2SubCategory');
@@ -229,7 +232,7 @@ class Project extends Component
                     Storage::delete($project->thumbnail);
                 }
                 $originalFileName = Str::slug(pathinfo($this->thumbnail->getClientOriginalName(), PATHINFO_FILENAME))
-                                    . rand(0,999) . '.' . $this->thumbnail->getClientOriginalExtension();
+                    . rand(0, 999) . '.' . $this->thumbnail->getClientOriginalExtension();
                 $thumbnailPath = $this->thumbnail->storeAs('thumbnails', $originalFileName, 'public');
             } else {
                 $thumbnailPath = $project->thumbnail;
@@ -248,6 +251,7 @@ class Project extends Component
                 'status_publish'   => $this->status_publish,
                 'version'          => $this->version,
                 'link_demo'        => $this->link_demo,
+                'link_github'        => $this->link_github,
             ]);
 
             // dd($this->images);
@@ -270,9 +274,9 @@ class Project extends Component
                 // Simpan gambar baru
                 foreach ($this->images as $image) {
                     $thumbnailPath = $image->storeAs(
-                        'gallery-project', 
-                        Str::slug(pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME)) 
-                        . rand(0, 999) . '.' . $image->getClientOriginalExtension(),
+                        'gallery-project',
+                        Str::slug(pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME))
+                            . rand(0, 999) . '.' . $image->getClientOriginalExtension(),
                         'public'
                     );
                     $project_image[] = [
@@ -296,7 +300,7 @@ class Project extends Component
             }
 
             ProjectDetail::insert($project_detail);
-    
+
             $this->dispatchAlert('success', 'Success!', 'Data updated successfully.');
             $this->resetInputFields();
             $this->dataId = null;
