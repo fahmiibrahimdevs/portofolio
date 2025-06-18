@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             ArticleCategorySeeder::class,
             ArticleSubCategorySeeder::class,
             ProjectCategorySeeder::class,
-            ProjectSubCategorySeeder::class,
             ProjectTagSeeder::class,
             AdminSeeder::class,
         ]);

@@ -4,29 +4,20 @@
             <div class="tw-hidden lg:tw-block">
                 <div
                     class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-950 tw-rounded-xl tw-shadow tw-shadow-slate-900 tw-p-4">
-                    <div class="tw-bg-slate-800 tw-py-4 tw-text-center tw-rounded-t-xl tw-text-base">
+                    <div class="tw-bg-slate-900 tw-py-4 tw-text-center tw-rounded-t-xl tw-text-base">
                         Kategori
                     </div>
                     <div class="tw-mt-5 tw-px-4 tw-space-y-3 tw-text-gray-50 tw-text-base">
-                        @foreach ($project_categories as $category_id => $categories)
-                        <a href="#" wire:click.prevent="changeCategoryId({{ $category_id }})"><i
-                                class="fas fa-tag tw-text-cyan-300"></i>
-                            <span
-                                class="tw-ml-0 hover:tw-text-cyan-300">{{ $categories->first()->category_name }}</span>
-                        </a>
-                        <ul class="tw-ml-[-18px] tw-text-gray-300">
-                            @if ($category_id == $this->category_id)
-                            @foreach ($categories as $category)
-                            @if ($category->sub_category_id)
-                            <li
-                                class="tw-mb-2 {{ $sub_category_id == $category->sub_category_id ? 'tw-text-yellow-300' : '' }}">
-                                <a href="#"
-                                    wire:click.prevent="changeSubCategoryId({{ $category->sub_category_id }})">{{ $category->sub_category_name }}</a>
-                            </li>
-                            @endif
-                            @endforeach
-                            @endif
-                        </ul>
+                        <p class="hover:tw-text-cyan-300 tw-cursor-pointer {{ $this->category_id == 0 ? "tw-text-yellow-300" : "tw-text-white" }}" wire:click.prevent="changeCategoryId(0)" style="margin-bottom: 10px !important;">Semua Project: <span class="tw-text-yellow-300 tw-float-right">({{ $total_projects }})</span></p>
+                        {{-- {{ $category_id }} --}}
+                        @foreach ($project_categories as $category_id => $category)
+                            <a href="#" class="tw-space-x-2" wire:click.prevent="changeCategoryId({{ $category_id }})">
+                                <i class="fas fa-tag tw-text-cyan-300"></i>
+                                <span class="tw-ml-0 hover:tw-text-cyan-300 {{ $category_id == $this->category_id ? "tw-text-yellow-300" : "tw-text-white" }}">
+                                    {{ $category->category_name }} <span class="tw-text-yellow-300 tw-float-right">({{ $category->total_projects }})</span>
+                                </span>
+                            </a>
+                            <ul class="tw-ml-[-18px] tw-text-gray-300"></ul>
                         @endforeach
                     </div>
                 </div>
@@ -47,29 +38,19 @@
                 <nav>
                     <div
                         class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-950 tw-rounded-xl tw-shadow tw-shadow-slate-900 tw-p-4">
-                        <div class="tw-bg-slate-800 tw-py-4 tw-text-center tw-rounded-t-xl tw-text-base">
+                        <div class="tw-bg-slate-900 tw-py-4 tw-text-center tw-rounded-t-xl tw-text-base">
                             Kategori
                         </div>
                         <div class="tw-mt-5 tw-px-4 tw-space-y-3 tw-text-gray-50 tw-text-base">
-                            @foreach ($project_categories as $category_id => $categories)
-                            <a href="#" wire:click.prevent="changeCategoryId({{ $category_id }})"><i
-                                    class="fas fa-tag tw-text-cyan-300"></i>
-                                <span
-                                    class="tw-ml-0 hover:tw-text-cyan-300">{{ $categories->first()->category_name }}</span>
-                            </a>
-                            <ul class="tw-ml-[-18px] tw-text-gray-300">
-                                @if ($category_id == $this->category_id)
-                                @foreach ($categories as $category)
-                                @if ($category->sub_category_id)
-                                <li
-                                    class="tw-mb-2 {{ $sub_category_id == $category->sub_category_id ? 'tw-text-yellow-300' : '' }}">
-                                    <a href="#"
-                                        wire:click.prevent="changeSubCategoryId({{ $category->sub_category_id }})">{{ $category->sub_category_name }}</a>
-                                </li>
-                                @endif
-                                @endforeach
-                                @endif
-                            </ul>
+                            <p class="hover:tw-text-cyan-300 tw-cursor-pointer" wire:click.prevent="changeCategoryId(0)" style="margin-bottom: 10px !important;">Semua Project: <span class="tw-text-yellow-300 tw-float-right">({{ $total_projects }})</span></p>
+                            @foreach ($project_categories as $category_id => $category)
+                                <a href="#" class="tw-space-x-2" wire:click.prevent="changeCategoryId({{ $category_id }})">
+                                    <i class="fas fa-tag tw-text-cyan-300"></i>
+                                    <span class="tw-ml-0 hover:tw-text-cyan-300">
+                                        {{ $category->category_name }} <span class="tw-text-yellow-300 tw-float-right">({{ $category->total_projects }})</span>
+                                    </span>
+                                </a>
+                                <ul class="tw-ml-[-18px] tw-text-gray-300"></ul>
                             @endforeach
                         </div>
                     </div>
@@ -89,29 +70,32 @@
                             class="filter-button tw-bg-slate-900 tw-text-cyan-300 tw-font-semibold tw-border tw-border-cyan-300 tw-px-4 tw-rounded-full tw-block lg:tw-hidden tw-ml-3 tw-h-12 tw-mt-5">Filter</button>
                     </div>
                 </div>
-                <p class="tw-mt-3 tw-text-base">Download berbagai source code dan script web lengkap untuk mendukung
-                    proyekmu, mulai dari aplikasi hingga fitur custom.</p>
+                <p class="tw-mt-3 tw-text-base">
+                    {!! $cat?->id != 0 ? '<span class="tw-text-yellow-300">'.$cat->category_name.'</span>' . ' - ' .$cat->category_desc : 'Download berbagai source code dan script web lengkap untuk mendukung proyekmu, mulai dari aplikasi hingga fitur custom.' !!}
+                </p>
                 <hr class="tw-mt-3 tw-border tw-border-slate-800">
                 <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-3 tw-gap-x-4 tw-gap-y-4 tw-mt-5">
                     @forelse ($projects as $project)
                     <div wire:key="{{ rand() }}"
-                        class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-900 tw-rounded-xl tw-shadow tw-shadow-slate-900 tw-flex tw-flex-col">
-                        <div class="tw-p-4">
-                            <img src="{{ asset('storage/'. $project->thumbnail) }}" class="tw-rounded-xl" alt="">
+                        class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-900 tw-rounded-xl tw-shadow-lg tw-shadow-slate-950 tw-flex tw-flex-col">
+                        <div class="tw-p-0">
+                            <img src="{{ asset('storage/'. $project->thumbnail) }}" class="tw-rounded-tr-xl tw-rounded-tl-xl" alt="">
                         </div>
                         <hr class="tw-border-dashed tw-border-slate-800 tw-border-[1.5px]">
                         <div class="tw-p-4 tw-text-center tw-flex tw-flex-col tw-flex-grow">
-                            <p class="tw-font-medium tw-text-base tw-tracking-wide">{{ $project->title }}</p>
-                            <p class="tw-mt-3">
+                            <p class="tw-font-medium tw-text-lg lg:tw-text-base tw-tracking-wide tw-text-cyan-300">{{ $project->title }}</p>
+                            <p class="tw-mt-4">
                                 <span
-                                    class="tw-bg-gray-700 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm">{{ $project->sub_category_name }}</span>
+                                    class="tw-bg-gray-800 hover:tw-bg-gray-900 tw-shadow-md tw-cursor-pointer tw-shadow-gray-900 tw-px-4 tw-py-1.5 tw-rounded-full tw-text-sm" wire:click.prevent="changeCategoryId({{ $project->category_id }})">🔥 {{ $project->category_name }}</span>
                             </p>
+                            <p class="tw-mt-4 tw-text-base lg:tw-text-sm tw-text-left">{{ Str::limit($project->short_desc, 75, '...') }}</p>
                         </div>
                         <hr class="tw-border-slate-800 lg:tw-border-slate-900">
                         <div class="tw-p-4 tw-flex tw-mt-auto tw-justify-between">
-                            <p class="tw-font-semibold tw-text-cyan-300 tw-text-lg">Rp{{ $project->price }}</p>
+                            <a target="_BLANK" href="{{ $project->link_github }}"
+                                class="tw-bg-transparent tw-border tw-border-cyan-300 tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide"><i class="fab fa-github tw-mr-1"></i> Github</a>
                             <a href="{{ url('/project/'.$project->slug) }}"
-                                class="tw-bg-transparent tw-border tw-border-cyan-300 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide">Detail</a>
+                                class="tw-bg-transparent tw-border tw-border-cyan-300 tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide"><i class="fas fa-link tw-mr-1"></i> Detail</a>
                         </div>
                     </div>
                     @endforeach

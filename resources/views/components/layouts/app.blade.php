@@ -92,10 +92,6 @@
                                 <li class="nav-item {{ request()->is('module/projects/category') ? 'active' : '' }}">
                                     <a href="/module/projects/category" class="nav-link">Category</a>
                                 </li>
-                                <li
-                                    class="nav-item {{ request()->is('module/projects/sub-category') ? 'active' : '' }}">
-                                    <a href="/module/projects/sub-category" class="nav-link">Sub-Category</a>
-                                </li>
                                 <li class="nav-item {{ request()->is('module/projects/tag') ? 'active' : '' }}">
                                     <a href="/module/projects/tag" class="nav-link">Tag</a>
                                 </li>

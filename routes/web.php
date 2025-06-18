@@ -38,7 +38,6 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/module/articles/posts', ArticlePosts::class);
 
     Route::get('/module/projects/category', ProjectCategory::class);
-    Route::get('/module/projects/sub-category', ProjectSubCategory::class);
     Route::get('/module/projects/tag', ProjectTag::class);
     Route::get('/module/projects/project', Project::class);
 });
@@ -51,4 +50,4 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {});
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

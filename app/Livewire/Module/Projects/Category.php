@@ -25,7 +25,7 @@ class Category extends Component
     public $previousSearchTerm = '';
     public $isEditing = false;
 
-    public $dataId, $category_name;
+    public $dataId, $category_name, $category_desc;
 
     public function updatingLengthData()
     {
@@ -72,6 +72,7 @@ class Category extends Component
     private function resetInputFields()
     {
         $this->category_name = '';
+        $this->category_desc = '-';
     }
 
     public function cancel()
@@ -85,6 +86,7 @@ class Category extends Component
 
         ProjectCategory::create([
             'category_name'     => $this->category_name,
+            'category_desc'     => $this->category_desc,
         ]);
 
         $this->dispatchAlert('success', 'Success!', 'Data created successfully.');
@@ -97,6 +99,7 @@ class Category extends Component
         $data = ProjectCategory::where('id', $id)->first();
         $this->dataId           = $id;
         $this->category_name    = $data->category_name;
+        $this->category_desc    = $data->category_desc;
     }
 
     public function update()
@@ -105,7 +108,8 @@ class Category extends Component
 
         if ($this->dataId) {
             ProjectCategory::findOrFail($this->dataId)->update([
-                'category_name'     => $this->category_name
+                'category_name'     => $this->category_name,
+                'category_desc'     => $this->category_desc
             ]);
             $this->dispatchAlert('success', 'Success!', 'Data updated successfully.');
             $this->resetInputFields();

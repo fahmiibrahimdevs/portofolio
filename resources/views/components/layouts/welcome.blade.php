@@ -131,9 +131,9 @@
                 <div
                     class="tw-inline-flex hover:tw-bg-gray-900 hover:tw-rounded-lg hover:tw-px-3 hover:tw-py-2 tw-mt-2">
                     <img src="{{ asset('icons/NEXARYN.png') }}" class="tw-w-10 tw-h-10 tw-rounded-full">
-                    <div class="tw-text-xs tw-tracking-wider tw-font-medium tw-mt-1">
+                    <div class="tw-text-xs tw-tracking-wide tw-font-medium tw-mt-1">
                         <p class="tw-ml-3 tw-text-cyan-400">Fahmi Ibrahim</p>
-                        <p class="tw-ml-3">@fhmiibrhimdev</p>
+                        <p class="tw-ml-3">@fahmiibrahimdevs</p>
                     </div>
                 </div>
             </a>

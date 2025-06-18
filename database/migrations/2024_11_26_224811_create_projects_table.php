@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->text('user_id');
             $table->text('category_id');
-            $table->text('sub_category_id');
             $table->text('tag_id');
             $table->text('thumbnail')->nullable();
             $table->text('date')->default('-');
             $table->text('title')->default('-');
             $table->text('slug')->default('-');
             $table->text('price')->default('-');
+            $table->text('short_desc')->default('-');
             $table->text('description')->default('-');
             $table->enum('status_publish', ['Published', 'Privated', 'Draft']);
             $table->text('version')->default('1.0.0');

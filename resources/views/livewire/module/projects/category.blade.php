@@ -29,6 +29,7 @@
                                 <tr class="tw-text-gray-700">
                                     <th width="6%" class="text-center">No</th>
                                     <th>Category Name</th>
+                                    <th>Description</th>
                                     <th class="text-center"><i class="fas fa-cog"></i></th>
                                 </tr>
                             </thead>
@@ -37,6 +38,7 @@
                                 <tr>
                                     <td class="text-center">{{ $loop->index + 1 }}</td>
                                     <td>{{ $row->category_name }}</td>
+                                    <td>{{ $row->category_desc }}</td>
                                     <td class="text-center">
                                         <button wire:click.prevent="edit({{ $row->id }})" class="btn btn-primary"
                                             data-toggle="modal" data-target="#formDataModal">
@@ -50,7 +52,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="3" class="text-center">Not data available in the table</td>
+                                    <td colspan="4" class="text-center">Not data available in the table</td>
                                 </tr>
                                 @endforelse
                             </tbody>
@@ -81,6 +83,10 @@
                         <div class="form-group">
                             <label for="category_name">Category Name</label>
                             <input type="text" wire:model="category_name" id="category_name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="category_desc">Desciption</label>
+                            <textarea wire:model="category_desc" id="category_desc" class="form-control" style="height: 150px !important;"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

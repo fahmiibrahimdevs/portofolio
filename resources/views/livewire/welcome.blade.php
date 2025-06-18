@@ -54,8 +54,7 @@
             <div class="tw-text-gray-300 tw-ml-16 lg:tw-ml-24 tw-text-[13px] lg:tw-text-sm" style="display: none;"
                 id="description-see-more">
                 <ul class="tw-list-disc tw-mt-3 tw-space-y-2">
-                    <li>Contributed to Internet of Things (IoT) research and prototype development, including sensor
-                        integration and data communication.</li>
+                    <li>Contributed to IoT research by designing and assembling electronic circuits, integrating sensors, and programming microcontrollers (Arduino, ESP8266, ESP32).</li>
                     <li>Managed server infrastructure, performed domain and DNS administration, and conducted routine
                         maintenance to ensure application availability.</li>
                     <li>Developed web-based applications and optimized database performance for better scalability and
@@ -64,8 +63,6 @@
                         operations. </li>
                     <li>Utilized version control systems (e.g., Git) and maintained comprehensive technical
                         documentation throughout the development lifecycle.</li>
-                    <li>Designed and assembled electronic circuits, performed precise soldering, and programmed
-                        microcontrollers (e.g., Arduino, ESP8266, ESP32) for various embedded systems projects.</li>
                 </ul>
                 <div class="tw-flex">
                     <img src="" alt="">
@@ -100,11 +97,11 @@
                 </ul>
                 <p class="tw-mt-3 tw-space-y-2 tw-ml-3 lg:tw-ml-1 tw-text-cyan-300">Key Projects:</p>
                 <ul class="tw-list-disc tw-mt-3 tw-space-y-2">
-                    <li>Developed 3 company profile websites with Panolens.js (AEON MALL, KASABLANKA HALL, JCC).</li>
-                    <li>Created an RFID-based Web Attendance System.</li>
-                    <li>Developed a Film Project Management System web app.</li>
-                    <li>Built a 5V Power Supply with Custom Case.</li>
-                    <li>Designed and built a Scoreboard System with button controller.</li>
+                    <li><span class="tw-text-yellow-300">Paid Project:</span> Developed 5 company profile websites with Panolens.js (AEON MALL, KASABLANKA HALL, JCC, METALFEST, CREATIVA).</li>
+                    <li><span class="tw-text-yellow-300">Campus Project:</span> Created an RFID-based Web Attendance System.</li>
+                    <li><span class="tw-text-yellow-300">Campus Project:</span> Developed a Film Project Management System web app.</li>
+                    <li><span class="tw-text-yellow-300">Campus Project:</span> Built a 5V Power Supply with Custom Case.</li>
+                    <li><span class="tw-text-yellow-300">Campus Project:</span> Designed and built a Scoreboard System with button controller.</li>
                 </ul>
                 <p class="tw-mt-3 tw-space-y-2 tw-ml-3 lg:tw-ml-1 tw-text-cyan-300">Skills Gained:</p>
                 <ul class="tw-list-disc tw-mt-3 tw-space-y-2">
@@ -325,33 +322,32 @@
                     Projects</h4>
                 <a href="{{ url('/projects') }}"
                     class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-800 tw-shadow tw-shadow-slate-800 tw-px-4 tw-py-1 tw-rounded-full tw-text-base tw-tracking-wide tw-mt-4">See
-                    All Projects</a>
+                    All Projects <span class="tw-text-yellow-300">({{ $total_projects }})</span></a>
             </div>
             <div class="tw-mt-5 tw-grid tw-grid-cols-1 lg:tw-grid-cols-4 tw-gap-4 tw-text-wide">
                 @foreach ($projects as $project)
-                <div
-                    class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-900 tw-rounded-xl tw-shadow tw-shadow-slate-900 tw-flex tw-flex-col">
-                    <div class="tw-p-4">
-                        <img src="{{ $project->thumbnail != NULL ? asset('storage/'. $project->thumbnail) : asset('images/default-image.jpg') }}"
-                            class="tw-rounded-xl" alt="">
+                <div wire:key="{{ rand() }}"
+                        class="tw-bg-gradient-to-tl tw-from-[#010022] tw-to-slate-900 tw-rounded-xl tw-shadow-md tw-shadow-slate-950 tw-flex tw-flex-col">
+                        <div class="tw-p-0">
+                            <img src="{{ asset('storage/'. $project->thumbnail) }}" class="tw-rounded-tr-xl tw-rounded-tl-xl" alt="">
+                        </div>
+                        <hr class="tw-border-dashed tw-border-slate-800 tw-border-[1.5px]">
+                        <div class="tw-p-4 tw-text-center tw-flex tw-flex-col tw-flex-grow">
+                            <p class="tw-font-medium tw-text-base tw-tracking-wide tw-text-cyan-300">{{ $project->title }}</p>
+                            <p class="tw-mt-4">
+                                <span
+                                    class="tw-bg-gray-800 tw-px-4 tw-py-1.5 tw-rounded-full tw-text-sm">🔥 {{ $project->category_name }}</span>
+                            </p>
+                            <p class="tw-mt-4 tw-text-left tw-text-sm">{{ Str::limit($project->short_desc, 75, '...') }}</p>
+                        </div>
+                        <hr class="tw-border-slate-800 lg:tw-border-slate-900">
+                        <div class="tw-p-4 tw-flex tw-mt-auto tw-justify-between">
+                            <a target="_BLANK" href="{{ $project->link_github }}"
+                                class="tw-bg-transparent tw-border tw-border-cyan-300 tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide"><i class="fab fa-github tw-mr-1"></i> Github</a>
+                            <a href="{{ url('/project/'.$project->slug) }}"
+                                class="tw-bg-transparent tw-border tw-border-cyan-300 tw-px-3 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide"><i class="fas fa-link tw-mr-1"></i> Detail</a>
+                        </div>
                     </div>
-                    <hr class="tw-border-dashed tw-border-slate-800 tw-border-[1.5px]">
-                    <div class="tw-p-4 tw-text-center tw-flex tw-flex-col tw-flex-grow">
-                        <p class="tw-font-medium tw-text-base tw-tracking-wide">{{ $project->title }}</p>
-                        <p class="tw-mt-3">
-                            <span
-                                class="tw-bg-gray-800 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm">{{ $project->sub_category_name }}</span>
-                        </p>
-                    </div>
-                    <hr class="tw-border-slate-800 lg:tw-border-slate-900">
-                    <div class="tw-p-4 tw-flex tw-mt-auto tw-justify-between">
-                        <a href="{{ $project->link_demo }}" target="_BLANK"
-                            class="tw-bg-sky-600 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide hover:tw-bg-sky-800">Live
-                            Demo</a>
-                        <a href="{{ url('project/' . $project->slug) }}" target="_BLANK"
-                            class="tw-bg-gray-600 tw-px-4 tw-py-1 tw-rounded-full tw-text-sm tw-tracking-wide hover:tw-bg-gray-800">Detail</a>
-                    </div>
-                </div>
                 @endforeach
             </div>
         </div>

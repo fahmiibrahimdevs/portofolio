@@ -46,7 +46,8 @@
                     <div
                         class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-center tw-text-black tw-tracking-tight tw-px-2.5 tw-mb-3 tw-flex-grow">
                         <p class="tw-mt-2">{{ Str::limit($row->title, 50, '...') }}</p>
-                        <span class="badge tw-bg-blue-100 tw-text-blue-400 tw-mt-2">{{ $row->sub_category_name }}</span>
+                        <span class="badge tw-bg-blue-100 tw-text-blue-400 tw-mt-2">{{ $row->category_name }}</span>
+                        <p class="tw-mt-2 tw-text-left">{{ Str::limit($row->short_desc, 50, '...') }}</p>
                     </div>
                     <div class="tw-flex tw-items-center tw-m-3 tw-mt-auto">
                         <p class="tw-text-gray-600 tw-tracking-normal">
@@ -119,7 +120,7 @@
                                     @enderror
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="category_id">Category Name</label>
                                             <div wire:ignore>
@@ -138,27 +139,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label for="sub_category_id">Sub Category Name</label>
-                                            <div wire:ignore>
-                                                <select wire:model="sub_category_id" id="sub_category_id" class="form-control"
-                                                    multiple>
-                                                    <option value="" disabled>-- Select Sub Category --</option>
-                                                    @foreach ($subcategories as $subcategory)
-                                                    <option value="{{ $subcategory['id'] }}" @if (in_array($subcategory['id'],
-                                                        $sub_category_id)) selected @endif>
-                                                        {{ $subcategory['sub_category_name'] }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            @error('sub_category_id')
-                                            <small class='text-danger'>{{ $message }}</small>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="status_publish">Status Publish</label>
                                             <div wire:ignore>
@@ -194,6 +175,13 @@
                                             @enderror
                                         </div>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="short_desc">Short Description</label>
+                                    <textarea wire:model="short_desc" id="short_desc" class="form-control" style="height: 75px"></textarea>
+                                    @error('short_desc')
+                                    <small class='text-danger'>{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>

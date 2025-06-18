@@ -8,7 +8,6 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
 use App\Models\ProjectCategory;
-use App\Models\ProjectSubCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Project as ModelsProject;
@@ -36,8 +35,8 @@ class Project extends Component
     public $searchTerm;
     public $previousSearchTerm = '';
     public $isEditing = false;
-    public $categories, $subcategories, $tags;
-    public $dataId, $category_id, $sub_category_id, $tag_id, $thumbnail, $date, $title, $slug, $price, $description, $status_publish, $version, $link_demo, $link_github;
+    public $categories, $tags;
+    public $dataId, $category_id, $tag_id, $thumbnail, $date, $title, $slug, $price, $short_desc, $description, $status_publish, $version, $link_demo, $link_github;
     public $text, $images;
 
     public function mount()
@@ -46,14 +45,13 @@ class Project extends Component
         $this->date         = date('Y-m-d H:i');
         $this->categories       = ProjectCategory::select('id', 'category_name')->get()->toArray();
         $this->category_id     = ProjectCategory::min('id');
-        $this->subcategories    = ProjectSubCategory::select('id', 'sub_category_name')->where('category_id', $this->category_id)->get()->toArray();
-        $this->sub_category_id = [];
         $this->text = [];
         $this->tags = ProjectTag::select('id', 'tag_name')->get()->toArray();
         $this->tag_id     = [];
         $this->title           = '';
         $this->slug            = null;
         $this->price            = "0";
+        $this->short_desc       = '-';
         $this->description       = '-';
         $this->status_publish  = 'Draft';
         $this->version  = '1.0.0';
@@ -92,19 +90,13 @@ class Project extends Component
         $this->previousSearchTerm = $this->searchTerm;
     }
 
-    public function updatedCategoryId()
-    {
-        $this->subcategories    = ProjectSubCategory::select('id', 'sub_category_name')->where('category_id', $this->category_id)->get()->toArray();
-        $this->dispatch('initSelect2SubCategory');
-    }
-
     public function render()
     {
         $this->searchResetPage();
         $search = '%' . $this->searchTerm . '%';
 
-        $data = ModelsProject::select('projects.id', 'thumbnail', 'date', 'title', 'slug', 'project_sub_categories.sub_category_name')
-            ->join('project_sub_categories', 'project_sub_categories.id', 'projects.sub_category_id')
+        $data = ModelsProject::select('projects.id', 'thumbnail', 'date', 'title', 'slug', 'short_desc', 'project_categories.category_name')
+            ->join('project_categories', 'project_categories.id', 'projects.category_id')
             ->where(function ($query) use ($search) {
                 $query->where('title', 'LIKE', $search);
                 $query->orWhere('date', 'LIKE', $search);
@@ -156,13 +148,13 @@ class Project extends Component
         $projects = ModelsProject::create([
             'user_id'          => Auth::user()->id,
             'category_id'      => $this->category_id,
-            'sub_category_id'  => implode(',', $this->sub_category_id),
             'tag_id'           => implode(',', $this->tag_id),
             'thumbnail'        => $thumbnailPath,
             'date'             => $this->date,
             'title'            => $this->title,
             'slug'             => strtolower(Str::slug($this->slug) != "" ? Str::slug($this->slug) : Str::slug($this->title)),
-            'price'      => $this->price,
+            'price'            => $this->price,
+            'short_desc'       => $this->short_desc,
             'description'      => $this->description,
             'status_publish'   => $this->status_publish,
             'version'          => $this->version,
@@ -203,19 +195,18 @@ class Project extends Component
         $data = ModelsProject::where('id', $id)->first();
         $this->dataId          = $id;
         $this->category_id     = $data->category_id;
-        $this->sub_category_id = explode(',', $data->sub_category_id);
         $this->date         = $data->date;
         $this->title           = $data->title;
         $this->slug            = $data->slug;
+        $this->price            = $data->price;
+        $this->short_desc       = $data->short_desc;
         $this->description       = $data->description;
         $this->status_publish  = $data->status_publish;
-        $this->subcategories    = ProjectSubCategory::select('id', 'sub_category_name')->where('category_id', $this->category_id)->get()->toArray();
         $this->version            = $data->version;
         $this->link_demo            = $data->link_demo;
         $this->link_github            = $data->link_github;
         $this->text = ProjectDetail::select('left_text', 'right_text')->where('project_id', $id)->get()->toArray();
         $this->tag_id = explode(',', $data->tag_id);
-        $this->dispatch('initSelect2SubCategory');
 
         $this->initSelect2();
     }
@@ -240,13 +231,13 @@ class Project extends Component
 
             $project->update([
                 'category_id'     => $this->category_id,
-                'sub_category_id' => implode(',', $this->sub_category_id),
                 'tag_id'           => implode(',', $this->tag_id),
                 'thumbnail'       => $thumbnailPath,
                 'date'             => $this->date,
                 'title'            => $this->title,
                 'slug'             => strtolower(Str::slug($this->slug) != "" ? Str::slug($this->slug) : Str::slug($this->title)),
                 'price'      => $this->price,
+                'short_desc'      => $this->short_desc,
                 'description'      => $this->description,
                 'status_publish'   => $this->status_publish,
                 'version'          => $this->version,
